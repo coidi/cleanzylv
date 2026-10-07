@@ -1,0 +1,938 @@
+<!DOCTYPE html>
+<html lang="lv">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cleanzy — Profesionāla uzkopšana Latvijā</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="icon" href="logo-cleanzy.png" type="image/png">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--navy:#0C1B3A;--navy2:#132247;--teal:#00BFA5;--teal-d:#009E8A;--light:#F4F7FB;--text:#1A1E2E;--muted:#5C6785;--white:#FFFFFF;--border:#DDE3EF}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',sans-serif;color:var(--text);background:var(--white);line-height:1.6}
+
+nav{position:sticky;top:0;z-index:100;background:var(--white);border-bottom:1px solid var(--border);padding:0 5%;display:flex;align-items:center;justify-content:space-between;height:68px}
+.logo{font-family:'Montserrat',sans-serif;font-weight:900;font-size:1.6rem;color:var(--navy);text-decoration:none;letter-spacing:-0.5px}
+.logo span{color:var(--teal)}
+.nav-right{display:flex;align-items:center;gap:20px}
+.nav-phone{font-family:'Montserrat',sans-serif;font-weight:700;font-size:1rem;color:var(--navy);text-decoration:none}
+.btn{display:inline-block;font-family:'Montserrat',sans-serif;font-weight:700;font-size:.9rem;padding:11px 22px;border-radius:6px;text-decoration:none;cursor:pointer;border:none;transition:background .2s,transform .15s}
+.btn-primary{background:var(--teal);color:var(--white)}
+.btn-primary:hover{background:var(--teal-d);transform:translateY(-1px)}
+.btn-lg{padding:16px 36px;font-size:1rem}
+
+/* Стили селектора языка */
+.lang-switcher{display:flex;align-items:center;gap:4px;background:var(--light);border:1px solid var(--border);border-radius:6px;padding:3px}
+.lang-btn{background:transparent;border:none;font-family:'Montserrat',sans-serif;font-weight:700;font-size:.78rem;padding:6px 10px;border-radius:4px;cursor:pointer;color:var(--muted);transition:all .2s}
+.lang-btn.active{background:var(--navy);color:var(--white)}
+
+.hero{background:var(--navy);background-image:linear-gradient(135deg,var(--navy) 55%,var(--navy2) 100%);padding:90px 5%;position:relative;overflow:hidden;color:var(--white)}
+.hero::before{content:'';position:absolute;top:-80px;right:-80px;width:420px;height:420px;border-radius:50%;background:var(--teal);opacity:.06}
+.hero::after{content:'';position:absolute;bottom:-60px;left:10%;width:260px;height:260px;border-radius:50%;background:var(--teal);opacity:.04}
+
+.hero-container{display:flex;align-items:center;justify-content:space-between;position:relative;z-index:1;gap:50px;max-width:1200px;margin:0 auto}
+.hero-inner{flex:1;max-width:600px}
+.hero-badge{display:inline-block;font-family:'Montserrat',sans-serif;font-size:.75rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--teal);background:rgba(0,191,165,.12);padding:6px 14px;border-radius:4px;margin-bottom:24px}
+.hero h1{font-family:'Montserrat',sans-serif;font-size:clamp(2.2rem,4.5vw,3.4rem);font-weight:900;color:var(--white);line-height:1.1;letter-spacing:-1px;margin-bottom:20px}
+.hero h1 em{font-style:normal;color:var(--teal)}
+.hero p{font-size:1.05rem;color:rgba(255,255,255,.7);max-width:520px;margin-bottom:36px;line-height:1.75}
+.hero-cta{display:flex;align-items:center;flex-wrap:wrap;gap:20px}
+.phone-link{display:flex;align-items:center;gap:10px;font-family:'Montserrat',sans-serif;font-weight:700;font-size:1.1rem;color:var(--white);text-decoration:none}
+.phone-icon{width:44px;height:44px;background:rgba(255,255,255,.1);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.2rem}
+
+.hero-image-wrap{flex:1;max-width:500px;height:400px;border-radius:16px;overflow:hidden;box-shadow:0 15px 40px rgba(0,0,0,.3);background:#c8d4e6}
+.hero-image-wrap img{width:100%;height:100%;object-fit:cover;display:block}
+
+@media(max-width:900px){
+  .hero-container{flex-direction:column;align-items:flex-start}
+  .hero-image-wrap{width:100%;max-width:100%;height:300px}
+}
+.trust-bar{background:var(--teal);padding:20px 5%;display:flex;justify-content:center;gap:36px;flex-wrap:wrap}
+.trust-item{display:flex;align-items:center;gap:8px;font-family:'Montserrat',sans-serif;font-weight:600;font-size:.88rem;color:var(--white)}
+
+section{padding:80px 5%}
+.section-label{font-family:'Montserrat',sans-serif;font-size:.72rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--teal);margin-bottom:10px}
+.section-title{font-family:'Montserrat',sans-serif;font-size:clamp(1.8rem,3vw,2.4rem);font-weight:800;color:var(--text);letter-spacing:-.5px;margin-bottom:12px;line-height:1.2}
+.section-sub{font-size:1rem;color:var(--muted);max-width:600px;line-height:1.75;margin-bottom:52px}
+
+.services-bg{background:var(--light)}
+.services-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:24px}
+.service-card{background:var(--white);border:1px solid var(--border);border-radius:14px;overflow:hidden;transition:box-shadow .2s,transform .2s}
+.service-card:hover{box-shadow:0 10px 36px rgba(12,27,58,.1);transform:translateY(-3px)}
+.svc-photo{width:100%;height:220px;overflow:hidden;background:#c8d4e6;position:relative}
+.svc-photo img{width:100%;height:100%;object-fit:cover;object-position:center;display:block;transition:transform .4s}
+.service-card:hover .svc-photo img{transform:scale(1.04)}
+.svc-fallback{display:none;width:100%;height:100%;align-items:center;justify-content:center;font-size:3.5rem;background:linear-gradient(135deg,#c8d4e6,#9fb5cf)}
+.service-body{padding:24px}
+.service-card h3{font-family:'Montserrat',sans-serif;font-size:1.1rem;font-weight:700;color:var(--text);margin-bottom:8px}
+.service-card p{font-size:.9rem;color:var(--muted);line-height:1.6;margin-bottom:16px}
+.price-tag{display:inline-block;font-family:'Montserrat',sans-serif;font-weight:700;font-size:.95rem;color:var(--teal-d);background:rgba(0,191,165,.1);padding:6px 14px;border-radius:5px}
+.price-list{list-style:none;margin-top:2px}
+.price-list li{display:flex;justify-content:space-between;font-size:.9rem;color:var(--muted);padding:6px 0;border-bottom:1px dashed var(--border)}
+.price-list li:last-child{border-bottom:none}
+.price-list strong{font-family:'Montserrat',sans-serif;font-weight:600;color:var(--teal-d)}
+
+.why-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:40px}
+.why-num{font-family:'Montserrat',sans-serif;font-size:3.2rem;font-weight:900;color:var(--teal);line-height:1;margin-bottom:12px}
+.why-item h3{font-family:'Montserrat',sans-serif;font-weight:700;font-size:1.1rem;margin-bottom:8px}
+.why-item p{font-size:.95rem;color:var(--muted);line-height:1.7}
+
+.steps-bg{background:var(--navy)}
+.steps-bg .section-title{color:var(--white)}
+.steps-bg .section-sub{color:rgba(255,255,255,.6)}
+.steps-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px}
+.step{padding:32px 28px;position:relative}
+.step:not(:last-child)::after{content:'→';position:absolute;right:-10px;top:56px;font-size:1.6rem;color:var(--teal);opacity:.4}
+.step-num{font-family:'Montserrat',sans-serif;font-size:3.2rem;font-weight:900;color:rgba(255,255,255,.07);line-height:1;margin-bottom:16px}
+.step-icon{font-size:2rem;margin-bottom:16px}
+.step h3{font-family:'Montserrat',sans-serif;font-weight:700;font-size:1.1rem;color:var(--white);margin-bottom:10px}
+.step p{font-size:.95rem;color:rgba(255,255,255,.55);line-height:1.7}
+
+.cities-bg{background:var(--light)}
+.cities-wrap{display:flex;flex-wrap:wrap;gap:12px}
+.city-tag{font-family:'Montserrat',sans-serif;font-size:.85rem;font-weight:600;color:var(--navy);background:var(--white);border:1px solid var(--border);padding:9px 18px;border-radius:24px}
+
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+.about-photo-wrap{width:100%;height:400px;border-radius:18px;overflow:hidden;background:#c8d4e6}
+.about-photo-wrap img{width:100%;height:100%;object-fit:cover;display:block}
+.about-text p{font-size:1rem;color:var(--muted);line-height:1.8;margin-bottom:18px}
+.highlight-box{background:var(--light);border-left:4px solid var(--teal);padding:18px 24px;border-radius:0 10px 10px 0;margin:24px 0;font-family:'Montserrat',sans-serif;font-weight:600;font-size:1rem;color:var(--navy);line-height:1.6}
+
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:start}
+.form-info h2{font-family:'Montserrat',sans-serif;font-size:clamp(1.6rem,2.5vw,2.1rem);font-weight:800;color:var(--text);margin-bottom:16px;line-height:1.2}
+.form-info p{color:var(--muted);font-size:1rem;line-height:1.8;margin-bottom:32px}
+.contact-detail{display:flex;align-items:center;gap:16px;margin-bottom:16px}
+.contact-detail strong{font-family:'Montserrat',sans-serif;font-weight:700;font-size:1rem;color:var(--text)}
+.contact-detail span{color:var(--muted);font-size:.9rem}
+.contact-icon{width:44px;height:44px;flex-shrink:0;background:var(--light);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.2rem}
+form{background:var(--light);border-radius:16px;padding:36px 32px;border:1px solid var(--border)}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+label{display:block;font-family:'Montserrat',sans-serif;font-size:.8rem;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+input,select,textarea{width:100%;border:2px solid var(--border);border-radius:8px;padding:12px 16px;font-family:'Inter',sans-serif;font-size:1rem;color:var(--text);background:var(--white);transition:border-color .2s;outline:none;appearance:none;-webkit-appearance:none}
+input:focus,select:focus,textarea:focus{border-color:var(--teal)}
+textarea{resize:vertical;min-height:120px}
+.form-field{margin-bottom:18px}
+.btn-submit{width:100%;margin-top:8px;font-family:'Montserrat',sans-serif;font-weight:700;font-size:1rem;padding:16px;border-radius:10px;background:var(--navy);color:var(--white);border:none;cursor:pointer;transition:background .2s,transform .15s}
+.btn-submit:hover{background:var(--navy2);transform:translateY(-1px)}
+.form-note{font-size:.85rem;color:var(--muted);text-align:center;margin-top:16px;line-height:1.6}
+.success-msg{display:none;text-align:center;padding:20px;font-weight:600;color:var(--teal-d)}
+
+footer{background:var(--navy);padding:40px 5%;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:20px}
+.footer-logo{font-family:'Montserrat',sans-serif;font-weight:900;font-size:1.4rem;color:var(--white);text-decoration:none;letter-spacing:-.5px}
+.footer-logo span{color:var(--teal)}
+.footer-copy{font-size:.83rem;color:rgba(255,255,255,.38)}
+.footer-phone a{font-family:'Montserrat',sans-serif;font-weight:700;font-size:.97rem;color:var(--white);text-decoration:none}
+
+@media(max-width:700px){.about-grid,.form-grid{grid-template-columns:1fr}}
+@media(max-width:640px){
+  .step:not(:last-child)::after{display:none}
+  nav,section,.hero,.trust-bar{padding-left:4%;padding-right:4%}
+  .hero{padding-top:70px;padding-bottom:60px}
+  .trust-bar{gap:16px;padding-top:14px;padding-bottom:14px}
+  form{padding:24px 16px}
+  footer{flex-direction:column;align-items:flex-start}
+  .nav-phone{display:none}
+  .form-row{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#" class="logo">Clean<span>zy</span></a>
+  <div class="nav-right">
+    <div class="lang-switcher">
+      <button class="lang-btn active" onclick="setLanguage('lv')">LV</button>
+      <button class="lang-btn" onclick="setLanguage('ru')">RU</button>
+      <button class="lang-btn" onclick="setLanguage('en')">EN</button>
+    </div>
+    <a href="tel:+37120003022" class="nav-phone">+371 200 03 022</a>
+    <a href="#pieteikums" class="btn btn-primary" data-i18n="navBtn">Pieteikties</a>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="hero-container">
+    <div class="hero-inner">
+      <div class="hero-badge" data-i18n="heroBadge">Profesionāla uzkopšana Latvijā</div>
+      <h1 data-i18n="heroTitle">Tīrība, kurai<br>var <em>uzticēties</em></h1>
+      <p data-i18n="heroDesc">Cleanzy — profesionāla dzīvokļu, biroju, industriālo telpu uzkopšana un logu mazgāšana visā Latvijā. Strādājam kvalitatīvi, precīzi un laicīgi.</p>
+      <div class="hero-cta">
+        <a href="#pieteikums" class="btn btn-primary btn-lg" data-i18n="heroCtaBtn">Atstāt pieteikumu</a>
+        <a href="tel:+37120003022" class="phone-link">
+          <div class="phone-icon">📞</div>
+          +371 200 03 022
+        </a>
+      </div>
+    </div>
+    <div class="hero-image-wrap">
+      <img src="https://images.pexels.com/photos/4098779/pexels-photo-4098779.jpeg" alt="Profesionāla uzkopšana Cleanzy">
+    </div>
+  </div>
+</section>
+
+<div class="trust-bar">
+  <div class="trust-item" data-i18n="trust1">✓ Strādājam bez brīvdienām</div>
+  <div class="trust-item" data-i18n="trust2">✓ Profesionāls aprīkojums</div>
+  <div class="trust-item" data-i18n="trust3">✓ Kvalitātes garantija</div>
+  <div class="trust-item" data-i18n="trust4">✓ Videi draudzīgi līdzekļi</div>
+</div>
+
+<!-- SERVICES -->
+<section class="services-bg" id="pakalpojumi">
+  <div class="section-label" data-i18n="servLabel">Pakalpojumi un cenas</div>
+  <div class="section-title" data-i18n="servTitle">Ko mēs uzkopjam</div>
+  <p class="section-sub" data-i18n="servSub">Visas cenas norādītas "no" — galīgo cenu aprēķinām pēc apskates. Zvaniet, un mēs konsultēsim bez maksas.</p>
+  <div class="services-grid">
+
+    <!-- 1. Office cleaning -->
+    <div class="service-card">
+      <div class="svc-photo">
+        <img src="https://media.istockphoto.com/id/1294313698/photo/man-disinfecting-an-office-desk.jpg?b=1&s=612x612&w=0&k=20&c=QEzf-nC4wlt6x-hTwhT6HkLvOy00lSQpjkwTOmG4V0U=" alt="Biroja uzkopšana"
+          onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <div class="svc-fallback">🏢</div>
+      </div>
+      <div class="service-body">
+        <h3 data-i18n="s1Title">Biroja uzkopšana</h3>
+        <p data-i18n="s1Desc">Regulāra un vienreizēja biroju tīrīšana. Strādājam ārpus darba laika, netraucējot jūsu komandu.</p>
+        <span class="price-tag" data-i18n="s1Price">no 0.60 €/m²</span>
+      </div>
+    </div>
+
+    <!-- 2. House/apartment cleaning -->
+    <div class="service-card">
+      <div class="svc-photo">
+        <img src="https://media.istockphoto.com/id/1417833187/photo/professional-cleaner-vacuuming-a-carpet.jpg?b=1&s=612x612&w=0&k=20&c=-hIxa-9UCDsDzdNrdRQI67WZvhrU34PKejODkGMi-jA=" alt="Mājas uzkopšana"
+          onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <div class="svc-fallback">🏠</div>
+      </div>
+      <div class="service-body">
+        <h3 data-i18n="s2Title">Mājas un dzīvokļa uzkopšana</h3>
+        <p data-i18n="s2Desc">Ikdienas un uzturošā uzkopšana. Virtuve, vannas istaba, istabas — viss mirdzēs.</p>
+        <span class="price-tag" data-i18n="s2Price">no 0.50 €/m²</span>
+      </div>
+    </div>
+
+    <!-- 3. General deep cleaning -->
+    <div class="service-card">
+      <div class="svc-photo">
+        <img src="https://images.pexels.com/photos/4097995/pexels-photo-4097995.jpeg" alt="Ģenerālā uzkopšana"
+          onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <div class="svc-fallback">🧹</div>
+      </div>
+      <div class="service-body">
+        <h3 data-i18n="s3Title">Ģenerālā uzkopšana</h3>
+        <p data-i18n="s3Desc">Padziļināta tīrīšana ar visu virsmu apstrādi — ideāli pirms/pēc nomas vai sezonas maiņas.</p>
+        <span class="price-tag" data-i18n="s3Price">no 0.80 €/m²</span>
+      </div>
+    </div>
+
+    <!-- 4. Post-renovation cleaning -->
+    <div class="service-card">
+      <div class="svc-photo">
+        <img src="https://media.istockphoto.com/id/2164667683/photo/a-young-man-vacuums-the-floor-with-a-construction-vacuum-cleaner.jpg?b=1&s=612x612&w=0&k=20&c=MdpBxXER2mKPEMDwbl0NexJIiAtrusw0BU4hxdPH9so=" alt="Uzkopšana pēc remonta"
+          onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <div class="svc-fallback">🔨</div>
+      </div>
+      <div class="service-body">
+        <h3 data-i18n="s4Title">Uzkopšana pēc remontdarbiem</h3>
+        <p data-i18n="s4Desc">Noņemsim celtniecības putekļus, krāsu, kaļķi un materiālu atliekas. Ātri un rūpīgi.</p>
+        <span class="price-tag" data-i18n="s4Price">no 1.10 €/m²</span>
+      </div>
+    </div>
+
+    <!-- 5. Upholstery/sofa cleaning -->
+    <div class="service-card">
+      <div class="svc-photo">
+        <img src="https://media.istockphoto.com/id/1724689214/photo/furniture-deep-cleaning.jpg?b=1&s=612x612&w=0&k=20&c=Ndb1R5qxAzMUMLTsSoLHzlYhIG3YiboShhzqDWIumq0=" alt="Mīksto mēbeļu tīrīšana"
+          onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <div class="svc-fallback">🛋️</div>
+      </div>
+      <div class="service-body">
+        <h3 data-i18n="s5Title">Mīksto mēbeļu tīrīšana</h3>
+        <p data-i18n="s5Desc">Ķīmiskā tīrīšana ar profesionālu aprīkojumu. Noņem traipus, baktērijas un smakas.</p>
+        <ul class="price-list">
+          <li><span data-i18n="s5Item1">Dīvāna ķīmiskā tīrīšana</span> <strong data-i18n="s5Price1">no 40 €</strong></li>
+          <li><span data-i18n="s5Item2">Stūra dīvāna ķīmiskā tīrīšana</span> <strong data-i18n="s5Price2">no 55 €</strong></li>
+          <li><span data-i18n="s5Item3">Krēslu tīrīšana</span> <strong data-i18n="s5Price3">no 3 € /gab.</strong></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- 6. Window washing -->
+    <div class="service-card">
+      <div class="svc-photo">
+        <img src="https://images.pexels.com/photos/31435403/pexels-photo-31435403.jpeg" alt="Logu mazgāšana"
+          onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <div class="svc-fallback">🪟</div>
+      </div>
+      <div class="service-body">
+        <h3 data-i18n="s6Title">Logu mazgāšana</h3>
+        <p data-i18n="s6Desc">Logi, rāmji, palodzes. Profesionāla ķīmija — bez plankumiem un traipiem.</p>
+        <span class="price-tag" data-i18n="s6Price">no 0.70 €/m²</span>
+      </div>
+    </div>
+
+    <!-- 7. Stairwell cleaning -->
+    <div class="service-card">
+      <div class="svc-photo">
+        <img src="https://media.istockphoto.com/id/2161323646/photo/female-janitor-black-ethnicity-and-senior-male-caucasian-janitor-mopping-the-stairs-in-the.jpg?b=1&s=612x612&w=0&k=20&c=XoPM3CJCmhO-PrX-ZpkeIem0inT-ZEFUibqrkD3sR1c=" alt="Kāpņu telpu uzkopšana"
+          onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <div class="svc-fallback">🏗️</div>
+      </div>
+      <div class="service-body">
+        <h3 data-i18n="s7Title">Kāpņu telpu uzkopšana</h3>
+        <p data-i18n="s7Desc">Regulāra daudzdzīvokļu māju kāpņu telpu tīrīšana. Ilgtermiņa abonements ar fiksētu cenu.</p>
+        <span class="price-tag" data-i18n="s7Price">no 3.20 €/mēn.</span>
+      </div>
+    </div>
+
+    <!-- 8. Outdoor/territory cleaning -->
+    <div class="service-card">
+      <div class="svc-photo">
+        <img src="https://media.istockphoto.com/id/1335018444/photo/cleaning-stone-slabs-on-patio-with-the-high-pressure-cleaner.jpg?b=1&s=612x612&w=0&k=20&c=l_2iQblopo9u1b8t5SpuuAW-kqNe-TjR-Xy_NHeP1ws=" alt="Teritorijas uzkopšana"
+          onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <div class="svc-fallback">🌿</div>
+      </div>
+      <div class="service-body">
+        <h3 data-i18n="s8Title">Teritorijas uzkopšana</h3>
+        <p data-i18n="s8Desc">Pagalmu, stāvvietu un apzaļumojuma uzkopšana. Cenu aprēķinām individuāli pēc apskates.</p>
+        <span class="price-tag" data-i18n="s8Price">Pēc pieteikuma</span>
+      </div>
+    </div>
+
+    <!-- 9. Industrial cleaning -->
+    <div class="service-card">
+      <div class="svc-photo">
+        <img src="https://media.istockphoto.com/id/935939426/photo/man-cleaning-the-ground-floor.jpg?b=1&s=612x612&w=0&k=20&c=L66HbdulEwOtcywCEzsCrgaE96kA071UjsBfym77zag=" alt="Ražošanas telpu uzkopšana"
+          onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <div class="svc-fallback">🏭</div>
+      </div>
+      <div class="service-body">
+        <h3 data-i18n="s9Title">Ražošanas telpu uzkopšana</h3>
+        <p data-i18n="s9Desc">Noliktavas, cehi, industriālās telpas. Strādājam ar profesionāliem industriālajiem līdzekļiem.</p>
+        <span class="price-tag" data-i18n="s9Price">no 0.50 €/m²</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- WHY -->
+<section>
+  <div class="section-label" data-i18n="whyLabel">Kāpēc Cleanzy</div>
+  <div class="section-title" data-i18n="whyTitle">Mūs izvēlas atkal un atkal</div>
+  <p class="section-sub" data-i18n="whySub">Strādājam tikai ar pārbaudītu personālu un profesionālu aprīkojumu.</p>
+  <div class="why-grid">
+    <div class="why-item">
+      <div class="why-num">100+</div>
+      <h3 data-i18n="why1Title">Apmierinātu klientu</h3>
+      <p data-i18n="why1Desc">Pastāvīgie klienti visā Latvijā, kuri uztic mums savus mājokļus un birojus.</p>
+    </div>
+    <div class="why-item">
+      <div class="why-num">3 h</div>
+      <h3 data-i18n="why2Title">Vidējais uzkopšanas laiks</h3>
+      <p data-i18n="why2Desc">Strādājam ātri, bet bez kvalitātes zaudēšanas. Ieradīsimies jums ērtā laikā.</p>
+    </div>
+    <div class="why-item">
+      <div class="why-num">0</div>
+      <h3 data-i18n="why3Title">Sūdzību par kvalitāti</h3>
+      <p data-i18n="why3Desc">Ja rezultāts neapmierina — pārtaisīsim bez maksas. Tā ir mūsu garantija.</p>
+    </div>
+    <div class="why-item">
+      <div class="why-num" data-i18n="why4Num">Eko</div>
+      <h3 data-i18n="why4Title">Droši līdzekļi</h3>
+      <p data-i18n="why4Desc">Nekaitīgi bērniem, dzīvniekiem un alerģijas slimniekiem. Tikai sertificēta ķīmija.</p>
+    </div>
+  </div>
+</section>
+
+<!-- STEPS -->
+<section class="steps-bg">
+  <div class="section-label" data-i18n="stepsLabel">Kā tas darbojas</div>
+  <div class="section-title" data-i18n="stepsTitle">Pasūtīt uzkopšanu ir vienkārši</div>
+  <p class="section-sub" data-i18n="stepsSub">Trīs soļi — un jūsu telpas ir tīras.</p>
+  <div class="steps-grid">
+    <div class="step">
+      <div class="step-num">01</div>
+      <div class="step-icon">📋</div>
+      <h3 data-i18n="step1Title">Atstājiet pieteikumu</h3>
+      <p data-i18n="step1Desc">Aizpildiet formu vai zvaniet mums. Precizēsim detaļas un vienosimies par laiku.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">02</div>
+      <div class="step-icon">🚗</div>
+      <h3 data-i18n="step2Title">Mēs ieradīsimies</h3>
+      <p data-i18n="step2Desc">Komanda ieradīsies noteiktajā laikā ar savu aprīkojumu un tīrīšanas līdzekļiem.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">03</div>
+      <div class="step-icon">✨</div>
+      <h3 data-i18n="step3Title">Pieņemiet rezultātu</h3>
+      <p data-i18n="step3Desc">Pārbaudiet darbu un apmaksājiet. Viss tīrs, viss savās vietās.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CITIES -->
+<section class="cities-bg">
+  <div class="section-label" data-i18n="citiesLabel">Darbības zona</div>
+  <div class="section-title" data-i18n="citiesTitle">Strādājam visā Latgalē un Latvijā</div>
+  <p class="section-sub" data-i18n="citiesSub">Piedāvājam uzkopšanas pakalpojumus vairāk nekā 30 pilsētās un novados.</p>
+  <div class="cities-wrap">
+    <span class="city-tag">Daugavpils</span><span class="city-tag">Rīga</span><span class="city-tag">Krāslava</span>
+    <span class="city-tag">Līvāni</span><span class="city-tag">Preiļi</span><span class="city-tag">Ludza</span>
+    <span class="city-tag">Balvi</span><span class="city-tag">Jelgava</span><span class="city-tag">Jūrmala</span>
+    <span class="city-tag">Rēzekne</span><span class="city-tag">Valmiera</span><span class="city-tag">Ogre</span>
+    <span class="city-tag">Jēkabpils</span><span class="city-tag">Cēsis</span><span class="city-tag">Sigulda</span>
+    <span class="city-tag">Saldus</span><span class="city-tag">Dobele</span><span class="city-tag">Bauska</span>
+    <span class="city-tag">Ādaži</span><span class="city-tag">Ķegums</span><span class="city-tag">Alūksne</span>
+    <span class="city-tag">Nereta</span><span class="city-tag">Aizkraukle</span><span class="city-tag">Limbaži</span>
+    <span class="city-tag">Rūjiena</span><span class="city-tag">Valka</span><span class="city-tag">Smiltene</span>
+    <span class="city-tag">Gulbene</span><span class="city-tag">Madona</span><span class="city-tag">Ventspils</span>
+    <span class="city-tag">Liepāja</span>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="par-mums">
+  <div class="about-grid">
+    <div>
+      <div class="about-photo-wrap">
+        <img src="https://images.pexels.com/photos/6195129/pexels-photo-6195129.jpeg?auto=compress&cs=tinysrgb&w=700&h=500&fit=crop" alt="Cleanzy komanda"
+          onerror="this.style.display='none'">
+      </div>
+    </div>
+    <div class="about-text">
+      <div class="section-label" data-i18n="aboutLabel">Par mums</div>
+      <div class="section-title" style="margin-bottom:20px" data-i18n="aboutTitle">Kas mēs esam</div>
+      <p data-i18n="aboutP1">Cleanzy ir profesionāls uzkopšanas uzņēmums, kas dibināts Daugavpilī. Mūsu misija ir vienkārša — nodrošināt augstākās kvalitātes tīrīšanas pakalpojumus privātpersonām un uzņēmumiem visā Latvijā.</p>
+      <p data-i18n="aboutP2">Mūsu komanda sastāv no apmācītiem un pieredzējušiem speciālistiem. Katrs darbinieks ir izgājis atlasi un apmācību, un strādā tikai ar profesionālu, sertificētu aprīkojumu un videi draudzīgiem tīrīšanas līdzekļiem, kas ir droši bērniem un mājdzīvniekiem.</p>
+      <div class="highlight-box" data-i18n="aboutBox">Mūsu princips: ja klients nav apmierināts ar rezultātu — mēs to labojam bez maksas.</div>
+      <p data-i18n="aboutP3">Gadu gaitā esam apkalpojuši vairāk nekā 100 klientu — no privātiem dzīvokļiem līdz lieliem ražošanas uzņēmumiem. Mēs augstu vērtējam katru klientu un piedāvājam individuālu pieeju katram objektam.</p>
+      <p data-i18n="aboutP4">Strādājam bez brīvdienām — jūs izvēlaties ērtu laiku, mēs pielāгоjamies.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FORM -->
+<section id="pieteikums" style="background:var(--light)">
+  <div class="form-grid">
+    <div class="form-info">
+      <div class="section-label" data-i18n="formLabel">Pieteikums</div>
+      <h2 data-i18n="formHeading">Atstājiet pieteikumu — atzvanīsim stundas laikā</h2>
+      <p data-i18n="formSub">Norādiet objekta veidu un ērtu laiku. Bez maksas novērtēsim apjomu un paziņosim cenu.</p>
+      <div class="contact-detail">
+        <div class="contact-icon">📞</div>
+        <div><strong><a href="tel:+37120003022" style="color:inherit;text-decoration:none">+371 200 03 022</a></strong><br><span data-i18n="formTime">P–Sv, 8:00–21:00</span></div>
+      </div>
+      <div class="contact-detail">
+        <div class="contact-icon">📍</div>
+        <div><strong data-i18n="formLocTitle">Daugavpils, Latvija</strong><br><span data-i18n="formLocSub">Strādājam visā Latvijā</span></div>
+      </div>
+      <div class="contact-detail">
+        <div class="contact-icon">✉️</div>
+        <div><strong>cleaning.cleanzy@gmail.com</strong><br><span data-i18n="formEmailSub">Atbildēsim stundas laikā</span></div>
+      </div>
+    </div>
+    <div>
+      <form id="contactForm">
+        <div class="form-row">
+          <div class="form-field">
+            <label data-i18n="lblVards">Vārds</label>
+            <input type="text" id="formName" placeholder="Jūsu vārds" data-i18n-placeholder="phVards" required>
+          </div>
+          <div class="form-field">
+            <label data-i18n="lblTel">Telefons</label>
+            <input type="tel" id="formPhone" placeholder="+371 ..." required>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-field">
+            <label data-i18n="lblPilseta">Pilsēta</label>
+            <input type="text" id="formCity" placeholder="Jūsu pilsēta" data-i18n-placeholder="phPilseta">
+          </div>
+          <div class="form-field">
+            <label data-i18n="lblPakalpojums">Pakalpojums</label>
+            <select id="formService">
+              <option value="" data-i18n="optDefault">— Izvēlēties —</option>
+              <option value="Biroja uzkopšana" data-i18n="opt1">Biroja uzkopšana</option>
+              <option value="Mājas / dzīvokļa uzkopšana" data-i18n="opt2">Mājas / dzīvokļa uzkopšana</option>
+              <option value="Ģenerālā uzkopšana" data-i18n="opt3">Ģenerālā uzkopšana</option>
+              <option value="Uzkopšana pēc remontdarbiem" data-i18n="opt4">Uzkopšana pēc remontdarbiem</option>
+              <option value="Mīksto mēbeļu tīrīšana" data-i18n="opt5">Mīksto mēbeļu tīrīšana</option>
+              <option value="Logu mazgāšana" data-i18n="opt6">Logu mazgāšana</option>
+              <option value="Kāpņu telpu uzkopšana" data-i18n="opt7">Kāpņu telpu uzkopšana</option>
+              <option value="Teritorijas uzkopšana" data-i18n="opt8">Teritorijas uzkopšana</option>
+              <option value="Ražošanas telpu uzkopšana" data-i18n="opt9">Ražošanas telpu uzkopšana</option>
+              <option value="Vairāki pakalpojumi" data-i18n="opt10">Vairāki pakalpojumi</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-field">
+          <label data-i18n="lblKom">Komentārs (nav obligāti)</label>
+          <textarea id="formComment" placeholder="Platība, stāvs, vēlamais laiks..." data-i18n-placeholder="phKom"></textarea>
+        </div>
+        <button type="submit" class="btn-submit" data-i18n="btnSubmit">Nosūtīt pieteikumu →</button>
+        <p class="form-note" data-i18n="formNote">Nospiežot pogu, jūs piekrītat personas datu apstrādei</p>
+      </form>
+      <div class="success-msg" id="successMsg" data-i18n="successMsgText">✓ Pieteikums nosūtīts! Atzvanīsim stundas laikā.</div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-copy" data-i18n="footerCopy">© 2025 Cleanzy. Daugavpils, Latvija</div>
+</footer>
+
+<script>
+// Словарь переводов
+const translations = {
+  lv: {
+    navBtn: "Pieteikties",
+    heroBadge: "Profesionāla uzkopšana Latvijā",
+    heroTitle: "Tīrība, kurai<br>var <em>uzticēties</em>",
+    heroDesc: "Cleanzy — profesionāla dzīvokļu, biroju, industriālo telpu uzkopšana un logu mazgāšana visā Latvijā. Strādājam kvalitatīvi, precīzi un laicīgi.",
+    heroCtaBtn: "Atstāt pieteikumu",
+    trust1: "✓ Strādājam bez brīvdienām",
+    trust2: "✓ Profesionāls aprīkojums",
+    trust3: "✓ Kvalitātes garantija",
+    trust4: "✓ Videi draudzīgi līdzekļi",
+    servLabel: "Pakalpojumi un cenas",
+    servTitle: "Ko mēs uzkopjam",
+    servSub: "Visas cenas norādītas \"no\" — galīgo cenu aprēķinām pēc apskates. Zvaniet, un mēs konsultēsim bez maksas.",
+    s1Title: "Biroja uzkopšana",
+    s1Desc: "Regulāra un vienreizēja biroju tīrīšana. Strādājam ārpus darba laika, netraucējot jūsu komandu.",
+    s1Price: "no 0.60 €/m²",
+    s2Title: "Mājas un dzīvokļa uzkopšana",
+    s2Desc: "Ikdienas un uzturošā uzkopšana. Virtuve, vannas istaba, istabas — viss mirdzēs.",
+    s2Price: "no 0.50 €/m²",
+    s3Title: "Ģenerālā uzkopšana",
+    s3Desc: "Padziļināta tīrīšana ar visu virsmu apstrādi — ideāli pirms/pēc nomas vai sezonas maiņas.",
+    s3Price: "no 0.80 €/m²",
+    s4Title: "Uzkopšana pēc remontdarbiem",
+    s4Desc: "Noņemsim celtniecības putekļus, krāsu, kaļķi un materiālu atliekas. Ātri un rūpīgi.",
+    s4Price: "no 1.10 €/m²",
+    s5Title: "Mīksto mēbeļu tīrīšana",
+    s5Desc: "Ķīmiskā tīrīšana ar profesionālu aprīkojumu. Noņem traipus, baktērijas un smakas.",
+    s5Item1: "Dīvāna ķīmiskā tīrīšana",
+    s5Price1: "no 40 €",
+    s5Item2: "Stūra dīvāna ķīmiskā tīrīšana",
+    s5Price2: "no 55 €",
+    s5Item3: "Krēslu tīrīšana",
+    s5Price3: "no 3 € /gab.",
+    s6Title: "Logu mazgāšana",
+    s6Desc: "Logi, rāmji, palodzes. Profesionāla ķīmija — bez plankumiem un traipiem.",
+    s6Price: "no 0.70 €/m²",
+    s7Title: "Kāpņu telpu uzkopšana",
+    s7Desc: "Regulāra daudzdzīvokļu māju kāpņu telpu tīrīšana. Ilgtermiņa abonements ar fiksētu cenu.",
+    s7Price: "no 3.20 €/mēn.",
+    s8Title: "Teritorijas uzkopšana",
+    s8Desc: "Pagalmu, stāvvietu un apzaļumojuma uzkopšana. Cenu aprēķinām individuāli pēc apskates.",
+    s8Price: "Pēc pieteikuma",
+    s9Title: "Ražošanas telpu uzkopšana",
+    s9Desc: "Noliktavas, cehi, industriālās telpas. Strādājam ar profesionāliem industriālajiem līdzekļiem.",
+    s9Price: "no 0.50 €/m²",
+    whyLabel: "Kāpēc Cleanzy",
+    whyTitle: "Mūs izvēlas atkal un atkal",
+    whySub: "Strādājam tikai ar pārbaudītu personālu un profesionālu aprīkojumu.",
+    why1Title: "Apmierinātu klientu",
+    why1Desc: "Pastāvīgie klienti visā Latvijā, kuri uztic mums savus mājokļus un birojus.",
+    why2Title: "Vidējais uzkopšanas laiks",
+    why2Desc: "Strādājam ātri, bet bez kvalitātes zaudēšanas. Ieradīsimies jums ērtā laikā.",
+    why3Title: "Sūdzību par kvalitāti",
+    why3Desc: "Ja rezultāts neapmierina — pārtaisīsim bez maksas. Tā ir mūsu garantija.",
+    why4Num: "Eko",
+    why4Title: "Droši līdzekļi",
+    why4Desc: "Nekaitīgi bērniem, dzīvniekiem un alerģijas slimniekiem. Tikai sertificēta ķīmija.",
+    stepsLabel: "Kā tas darbojas",
+    stepsTitle: "Pasūtīt uzkopšanu ir vienkārši",
+    stepsSub: "Trīs soļi — un jūsu telpas ir tīras.",
+    step1Title: "Atstājiet pieteikumu",
+    step1Desc: "Aizpildiet formu vai zvaniet mums. Precizēsim detaļas un vienosimies par laiku.",
+    step2Title: "Mēs ieradīsimies",
+    step2Desc: "Komanda ieradīsies noteiktajā laikā ar savu aprīkojumu un tīrīšanas līdzekļiem.",
+    step3Title: "Pieņemiet rezultātu",
+    step3Desc: "Pārbaudiet darbu un apmaksājiet. Viss tīrs, viss savās vietās.",
+    citiesLabel: "Darbības zona",
+    citiesTitle: "Strādājam visā Latgalē un Latvijā",
+    citiesSub: "Piedāvājam uzkopšanas pakalpojumus vairāk nekā 30 pilsētās un novados.",
+    aboutLabel: "Par mums",
+    aboutTitle: "Kas mēs esam",
+    aboutP1: "Cleanzy ir profesionāls uzkopšanas uzņēmums, kas dibināts Daugavpilī. Mūsu misija ir vienkārša — nodrošināt augstākās kvalitātes tīrīšanas pakalpojumus privātpersonām un uzņēmumiem visā Latvijā.",
+    aboutP2: "Mūsu komanda sastāv no apmācītiem un pieredzējušiem speciālistiem. Katrs darbinieks ir izgājis atlasi un apmācību, un strādā tikai ar profesionālu, sertificētu aprīkojumu un videi draudzīgiem tīrīšanas līdzekļiem, kas ir droši bērniem un mājdzīvniekiem.",
+    aboutBox: "Mūsu princips: ja klients nav apmierināts ar rezultātu — mēs to labojam bez maksas.",
+    aboutP3: "Gadu gaitā esam apkalpojuši vairāk nekā 100 klientu — no privātiem dzīvokļiem līdz lieliem ražošanas uzņēmumiem. Mēs augstu vērtējam katru klientu un piedāvājam individuālu pieeju katram objektam.",
+    aboutP4: "Strādājam bez brīvdienām — jūs izvēlaties ērtu laiku, mēs pielāгоjamies.",
+    formLabel: "Pieteikums",
+    formHeading: "Atstājiet pieteikumu — atzvanīsim stundas laikā",
+    formSub: "Norādiet objekta veidu un ērtu laiku. Bez maksas novērtēsim apjomu un paziņosim cenu.",
+    formTime: "P–Sv, 8:00–21:00",
+    formLocTitle: "Daugavpils, Latvija",
+    formLocSub: "Strādājam visā Latvijā",
+    formEmailSub: "Atbildēsim stundas laikā",
+    lblVards: "Vārds",
+    phVards: "Jūsu vārds",
+    lblTel: "Telefons",
+    lblPilseta: "Pilsēta",
+    phPilseta: "Jūsu pilsēta",
+    lblPakalpojums: "Pakalpojums",
+    optDefault: "— Izvēlēties —",
+    opt1: "Biroja uzkopšana",
+    opt2: "Mājas / dzīvokļa uzkopšana",
+    opt3: "Ģenerālā uzkopšana",
+    opt4: "Uzkopšana pēc remontdarbiem",
+    opt5: "Mīksto mēbeļu tīrīšana",
+    opt6: "Logu mazgāšana",
+    opt7: "Kāpņu telpu uzkopšana",
+    opt8: "Teritorijas uzkopšana",
+    opt9: "Ražošanas telpu uzkopšana",
+    opt10: "Vairāki pakalpojumi",
+    lblKom: "Komentārs (nav obligāti)",
+    phKom: "Platība, stāvs, vēlamais laiks...",
+    btnSubmit: "Nosūtīt pieteikumu →",
+    formNote: "Nospiežot pogu, jūs piekrītat personas datu apstrādei",
+    successMsgText: "✓ Pieteikums nosūtīts! Atzvanīsim stundas laikā.",
+    footerCopy: "© 2025 Cleanzy. Daugavpils, Latvija"
+  },
+  ru: {
+    navBtn: "Оставить заявку",
+    heroBadge: "Профессиональная уборка в Латвии",
+    heroTitle: "Чистота, которой<br>можно <em>доверять</em>",
+    heroDesc: "Cleanzy — профессиональная уборка квартир, офисов, промышленных помещений и мойка окон по всей Латвии. Работаем качественно, точно и вовремя.",
+    heroCtaBtn: "Оставить заявку",
+    trust1: "✓ Работаем без выходных",
+    trust2: "✓ Профессиональное оборудование",
+    trust3: "✓ Гарантия качества",
+    trust4: "✓ Экологичные средства",
+    servLabel: "Услуги и цены",
+    servTitle: "Что мы убираем",
+    servSub: "Все цены указаны «от» — окончательную стоимость рассчитываем после осмотра. Звоните, и мы проконсультируем бесплатно.",
+    s1Title: "Уборка офисов",
+    s1Desc: "Регулярная и разовая уборка офисов. Работаем вне рабочего времени, не мешая вашей команде.",
+    s1Price: "от 0.60 €/м²",
+    s2Title: "Уборка домов и квартир",
+    s2Desc: "Ежедневная и поддерживающая уборка. Кухня, ванная, комнаты — все будет сиять.",
+    s2Price: "от 0.50 €/м²",
+    s3Title: "Генеральная уборка",
+    s3Desc: "Глубокая чистка с обработкой всех поверхностей — идеально до/после аренды или смены сезона.",
+    s3Price: "от 0.80 €/м²",
+    s4Title: "Уборка после ремонта",
+    s4Desc: "Уберем строительную пыль, краску, известь и остатки материалов. Быстро и тщательно.",
+    s4Price: "от 1.10 €/м²",
+    s5Title: "Химчистка мягкой мебели",
+    s5Desc: "Химчистка профессиональным оборудованием. Удаляет пятна, бактерии и запахи.",
+    s5Item1: "Химчистка дивана",
+    s5Price1: "от 40 €",
+    s5Item2: "Химчистка углового дивана",
+    s5Price2: "от 55 €",
+    s5Item3: "Чистка стульев",
+    s5Price3: "от 3 € /шт.",
+    s6Title: "Мойка окон",
+    s6Desc: "Окна, рамы, подоконники. Профессиональная химия — без разводов и пятен.",
+    s6Price: "от 0.70 €/м²",
+    s7Title: "Уборка подъездов",
+    s7Desc: "Регулярная уборка подъездов многоквартирных домов. Долгосрочный абонемент с фиксированной ценой.",
+    s7Price: "от 3.20 €/мес.",
+    s8Title: "Уборка территории",
+    s8Desc: "Уборка дворов, парковок и зеленых зон. Стоимость рассчитывается индивидуально после осмотра.",
+    s8Price: "По запросу",
+    s9Title: "Уборка производственных помещений",
+    s9Desc: "Склады, цеха, промышленные помещения. Работаем с профессиональными промышленными средствами.",
+    s9Price: "от 0.50 €/м²",
+    whyLabel: "Почему Cleanzy",
+    whyTitle: "Нас выбирают снова и снова",
+    whySub: "Работаем только с проверенным персоналом и профессиональным оборудованием.",
+    why1Title: "Довольных клиентов",
+    why1Desc: "Постоянные клиенты по всей Латвии, которые доверяют нам свои дома и офисы.",
+    why2Title: "Среднее время уборки",
+    why2Desc: "Работаем быстро, но без потери качества. Приедем в удобное для вас время.",
+    why3Title: "Жалоб на качество",
+    why3Desc: "Если результат не устраивает — переделаем бесплатно. Это наша гарантия.",
+    why4Num: "Эко",
+    why4Title: "Безопасные средства",
+    why4Desc: "Безвредны для детей, животных и аллергиков. Только сертифицированная химия.",
+    stepsLabel: "Как это работает",
+    stepsTitle: "Заказать уборку просто",
+    stepsSub: "Три шага — и ваши помещения чистые.",
+    step1Title: "Оставьте заявку",
+    step1Desc: "Заполните форму или позвоните нам. Уточним детали и договоримся о времени.",
+    step2Title: "Мы приедем",
+    step2Desc: "Команда прибудет в назначенное время со своим оборудованием и чистящими средствами.",
+    step3Title: "Примите результат",
+    step3Desc: "Проверьте работу и оплатите. Всё чисто, всё на своих местах.",
+    citiesLabel: "Зона работы",
+    citiesTitle: "Работаем по всей Латгалии и Латвии",
+    citiesSub: "Предлагаем услуги уборки более чем в 30 городах и краях.",
+    aboutLabel: "О нас",
+    aboutTitle: "Кто мы",
+    aboutP1: "Cleanzy — профессиональная клининговая компания, основанная в Даугавпилсе. Наша миссия проста — предоставлять услуги уборки высшего качества для частных лиц и предприятий по всей Латвии.",
+    aboutP2: "Наша команда состоит из обученных и опытных специалистов. Каждый сотрудник прошел отбор и обучение, работает только с профессиональным, сертифицированным оборудованием и экологически чистыми средствами, безопасными для детей и домашних животных.",
+    aboutBox: "Наш принцип: если клиент недоволен результатом — мы переделываем бесплатно.",
+    aboutP3: "За годы работы мы обслужили более 100 клиентов — от частных квартир до крупных производственных предприятий. Мы ценим каждого клиента и предлагаем индивидуальный подход к каждому объекту.",
+    aboutP4: "Работаем без выходных — вы выбираете удобное время, мы подстраиваемся.",
+    formLabel: "Заявка",
+    formHeading: "Оставьте заявку — перезвоним в течение часа",
+    formSub: "Укажите тип объекта и удобное время. Бесплатно оценим объем и назовем цену.",
+    formTime: "Пн–Вс, 8:00–21:00",
+    formLocTitle: "Даугавпилс, Латвия",
+    formLocSub: "Работаем по всей Латвии",
+    formEmailSub: "Ответим в течение часа",
+    lblVards: "Имя",
+    phVards: "Ваше имя",
+    lblTel: "Телефон",
+    lblPilseta: "Город",
+    phPilseta: "Ваш город",
+    lblPakalpojums: "Услуга",
+    optDefault: "— Выбрать —",
+    opt1: "Уборка офисов",
+    opt2: "Уборка домов и квартир",
+    opt3: "Генеральная уборка",
+    opt4: "Уборка после ремонта",
+    opt5: "Химчистка мягкой мебели",
+    opt6: "Мойка окон",
+    opt7: "Уборка подъездов",
+    opt8: "Уборка территории",
+    opt9: "Уборка производственных помещений",
+    opt10: "Несколько услуг",
+    lblKom: "Комментарий (необязательно)",
+    phKom: "Площадь, этаж, желаемое время...",
+    btnSubmit: "Отправить заявку →",
+    formNote: "Нажимая кнопку, вы соглашаетесь на обработку персональных данных",
+    successMsgText: "✓ Заявка отправлена! Перезвоним в течение часа.",
+    footerCopy: "© 2025 Cleanzy. Daugavpils, Latvija"
+  },
+  en: {
+    navBtn: "Book Now",
+    heroBadge: "Professional cleaning in Latvia",
+    heroTitle: "Cleanliness you<br>can <em>trust</em>",
+    heroDesc: "Cleanzy — professional apartment, office, industrial cleaning and window washing across Latvia. We work with high quality, precision and on time.",
+    heroCtaBtn: "Leave a request",
+    trust1: "✓ Open 7 days a week",
+    trust2: "✓ Professional equipment",
+    trust3: "✓ Quality guarantee",
+    trust4: "✓ Eco-friendly products",
+    servLabel: "Services & Pricing",
+    servTitle: "What we clean",
+    servSub: "All prices are listed as 'from' — the final price is calculated after inspection. Call us for a free consultation.",
+    s1Title: "Office Cleaning",
+    s1Desc: "Regular and one-time office cleaning. We work outside business hours without disturbing your team.",
+    s1Price: "from 0.60 €/m²",
+    s2Title: "House & Apartment Cleaning",
+    s2Desc: "Daily and maintenance cleaning. Kitchen, bathroom, rooms — everything will shine.",
+    s2Price: "from 0.50 €/m²",
+    s3Title: "General Deep Cleaning",
+    s3Desc: "In-depth cleaning with full surface treatment — ideal before/after rental or season changes.",
+    s3Price: "from 0.80 €/m²",
+    s4Title: "Post-Renovation Cleaning",
+    s4Desc: "We will remove construction dust, paint, lime and material residues. Fast and thorough.",
+    s4Price: "from 1.10 €/m²",
+    s5Title: "Upholstery Cleaning",
+    s5Desc: "Deep cleaning with professional equipment. Removes stains, bacteria and odors.",
+    s5Item1: "Sofa dry cleaning",
+    s5Price1: "from 40 €",
+    s5Item2: "Corner sofa dry cleaning",
+    s5Price2: "from 55 €",
+    s5Item3: "Chair cleaning",
+    s5Price3: "from 3 € /pc.",
+    s6Title: "Window Washing",
+    s6Desc: "Windows, frames, sills. Professional chemicals — streak and spot free.",
+    s6Price: "from 0.70 €/m²",
+    s7Title: "Stairwell Cleaning",
+    s7Desc: "Regular multi-apartment building stairwell cleaning. Long-term subscription with a fixed price.",
+    s7Price: "from 3.20 €/mo.",
+    s8Title: "Outdoor Cleaning",
+    s8Desc: "Yard, parking and green area cleaning. Price calculated individually after inspection.",
+    s8Price: "On request",
+    s9Title: "Industrial Premises Cleaning",
+    s9Desc: "Warehouses, workshops, industrial facilities. We work with professional industrial products.",
+    s9Price: "from 0.50 €/m²",
+    whyLabel: "Why Cleanzy",
+    whyTitle: "Chosen again and again",
+    whySub: "We work only with proven personnel and professional equipment.",
+    why1Title: "Satisfied clients",
+    why1Desc: "Regular clients throughout Latvia who entrust us with their homes and offices.",
+    why2Title: "Average cleaning time",
+    why2Desc: "We work fast without losing quality. We will arrive at a time convenient for you.",
+    why3Title: "Quality complaints",
+    why3Desc: "If the result is not satisfactory — we redo it for free. That is our guarantee.",
+    why4Num: "Eco",
+    why4Title: "Safe products",
+    why4Desc: "Safe for children, pets and allergy sufferers. Certified chemistry only.",
+    stepsLabel: "How it works",
+    stepsTitle: "Ordering cleaning is simple",
+    stepsSub: "Three steps — and your premises are clean.",
+    step1Title: "Leave a request",
+    step1Desc: "Fill out the form or call us. We will clarify details and agree on a time.",
+    step2Title: "We will arrive",
+    step2Desc: "The team will arrive at the scheduled time with their equipment and cleaning supplies.",
+    step3Title: "Accept the result",
+    step3Desc: "Check the work and pay. Everything clean, everything in its place.",
+    citiesLabel: "Service area",
+    citiesTitle: "Working across Latgale and Latvia",
+    citiesSub: "We offer cleaning services in more than 30 cities and regions.",
+    aboutLabel: "About us",
+    aboutTitle: "Who we are",
+    aboutP1: "Cleanzy is a professional cleaning company founded in Daugavpils. Our mission is simple — to provide top quality cleaning services for individuals and businesses across Latvia.",
+    aboutP2: "Our team consists of trained and experienced specialists. Each employee has gone through selection and training, working only with professional, certified equipment and eco-friendly cleaning agents safe for children and pets.",
+    aboutBox: "Our principle: if the client is not satisfied with the result — we fix it for free.",
+    aboutP3: "Over the years, we have served more than 100 clients — from private apartments to large manufacturing enterprises. We value every client and offer an individual approach to each facility.",
+    aboutP4: "Open 7 days a week — you choose a convenient time, we adapt.",
+    formLabel: "Request",
+    formHeading: "Leave a request — we will call back within an hour",
+    formSub: "Specify the facility type and a convenient time. We will estimate the volume and quote a price for free.",
+    formTime: "Mon–Sun, 8:00–21:00",
+    formLocTitle: "Daugavpils, Latvia",
+    formLocSub: "Working across Latvia",
+    formEmailSub: "We will reply within an hour",
+    lblVards: "Name",
+    phVards: "Your name",
+    lblTel: "Phone",
+    lblPilseta: "City",
+    phPilseta: "Your city",
+    lblPakalpojums: "Service",
+    optDefault: "— Select —",
+    opt1: "Office cleaning",
+    opt2: "House / apartment cleaning",
+    opt3: "General deep cleaning",
+    opt4: "Post-renovation cleaning",
+    opt5: "Upholstery cleaning",
+    opt6: "Window washing",
+    opt7: "Stairwell cleaning",
+    opt8: "Outdoor cleaning",
+    opt9: "Industrial premises cleaning",
+    opt10: "Multiple services",
+    lblKom: "Comment (optional)",
+    phKom: "Area, floor, preferred time...",
+    btnSubmit: "Send request →",
+    formNote: "By clicking the button, you agree to personal data processing",
+    successMsgText: "✓ Request sent! We will call back within an hour.",
+    footerCopy: "© 2025 Cleanzy. Daugavpils, Latvia"
+  }
+};
+
+function setLanguage(lang) {
+  // Сохраняем выбор в localStorage
+  localStorage.setItem('cleanzy_lang', lang);
+
+  // Обновляем активную кнопку переключателя
+  document.querySelectorAll('.lang-btn').forEach(btn => {
+    btn.classList.remove('active');
+    if(btn.textContent.toLowerCase() === lang) {
+      btn.classList.add('active');
+    }
+  });
+
+  // Устанавливаем атрибут lang у html
+  document.documentElement.lang = lang;
+
+  // Меняем текстовые элементы
+  const t = translations[lang];
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    if(t[key]) {
+      el.innerHTML = t[key];
+    }
+  });
+
+  // Меняем placeholder-ы у инпутов
+  document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+    const key = el.getAttribute('data-i18n-placeholder');
+    if(t[key]) {
+      el.placeholder = t[key];
+    }
+  });
+}
+
+// При загрузке страницы проверяем сохраненный язык (по умолчанию LV)
+document.addEventListener('DOMContentLoaded', () => {
+  const savedLang = localStorage.getItem('cleanzy_lang') || 'lv';
+  setLanguage(savedLang);
+});
+
+document.getElementById('contactForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+  
+  const name = document.getElementById('formName').value;
+  const phone = document.getElementById('formPhone').value;
+  const city = document.getElementById('formCity').value || 'Nav norādīts';
+  const service = document.getElementById('formService').value || 'Nav izvēlēts';
+  const comment = document.getElementById('formComment').value || 'Nav komentāru';
+  
+  const msgText = `✨ JAUNS PIETEIKUMS (Cleanzy) ✨\n\n` +
+                  `👤 Vārds: ${name}\n` +
+                  `📞 Telefons: ${phone}\n` +
+                  `🏙 Pilsēta: ${city}\n` +
+                  `🧹 Pakalpojums: ${service}\n` +
+                  `💬 Komentārs: ${comment}`;
+
+  const telegramToken = '8714867633:AAFIg2zR7Olz2rwwHdCfkx9wkafv4dMAziM'; 
+  const telegramChatId = '461512842';
+  
+  fetch(`https://api.telegram.org/bot${telegramToken}/sendMessage`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      chat_id: telegramChatId,
+      text: msgText
+    })
+  })
+  .then(response => {
+    document.getElementById('contactForm').reset();
+    showThankYouPopup();
+  })
+  .catch(err => {
+    console.error('Telegram error:', err);
+  });
+});
+
+function showThankYouPopup() {
+  const existing = document.getElementById('cleanzyPopup');
+  if (existing) existing.remove();
+
+  const currentLang = localStorage.getItem('cleanzy_lang') || 'lv';
+  const popupTitles = { lv: 'Paldies!', ru: 'Спасибо!', en: 'Thank you!' };
+  const popupTexts = { lv: 'Jūsu pieteikums ir saņemts.', ru: 'Ваша заявка принята.', en: 'Your request has been received.' };
+
+  const popup = document.createElement('div');
+  popup.id = 'cleanzyPopup';
+  popup.innerHTML = `
+    <div style="font-size: 32px; margin-bottom: 8px;">✅</div>
+    <div style="font-size: 18px; font-weight: bold; margin-bottom: 4px;">${popupTitles[currentLang]}</div>
+    <div style="font-size: 14px; opacity: 0.9;">${popupTexts[currentLang]}</div>
+  `;
+  
+  Object.assign(popup.style, {
+    position: 'fixed',
+    bottom: '30px',
+    right: '30px',
+    backgroundColor: '#111827',
+    color: '#ffffff',
+    padding: '20px 30px',
+    borderRadius: '12px',
+    boxShadow: '0 10px 25px rgba(0,0,0,0.2)',
+    fontFamily: 'inherit',
+    zIndex: '99999',
+    textAlign: 'center',
+    opacity: '0',
+    transition: 'opacity 0.4s ease, transform 0.4s ease',
+    transform: 'translateY(20px)'
+  });
+
+  document.body.appendChild(popup);
+
+  setTimeout(() => {
+    popup.style.opacity = '1';
+    popup.style.transform = 'translateY(0)';
+  }, 10);
+
+  setTimeout(() => {
+    popup.style.opacity = '0';
+    popup.style.transform = 'translateY(20px)';
+    setTimeout(() => popup.remove(), 400);
+  }, 4000);
+}
+</script>
+</body>
+</html>
